@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_USER: ${MYSQL_USER:-hospital}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-hospital}
+      MYSQL_DATABASE: hospital_auth
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./infra/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+  auth-service:
+    build: ./services/auth-service
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-change-this-development-secret-to-at-least-32-characters}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-replace-with-google-client-id}
+    ports: ["9001:9001"]
+  doctor-service:
+    build: ./services/doctor-service
+    environment: &service-env
+      MYSQL_USER: ${MYSQL_USER:-hospital}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-hospital}
+      JWT_SECRET: ${JWT_SECRET:-change-this-development-secret-to-at-least-32-characters}
+    ports: ["9002:9002"]
+  patient-service:
+    build: ./services/patient-service
+    environment: *service-env
+    ports: ["9003:9003"]
+  appointment-service:
+    build: ./services/appointment-service
+    environment: *service-env
+    ports: ["9004:9004"]
+  api-gateway:
+    build: ./services/api-gateway
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-change-this-development-secret-to-at-least-32-characters}
+    ports: ["8080:8080"]
+    depends_on: [auth-service, doctor-service, patient-service, appointment-service]
+volumes:
+  mysql-data:

@@ -1,0 +1,6 @@
+com\example\hospital\patient\PatientController$PatientRequest.class
+com\example\hospital\patient\PatientRepository.class
+com\example\hospital\patient\Patient.class
+com\example\hospital\patient\PatientController.class
+com\example\hospital\patient\PatientServiceApplication.class
+com\example\hospital\patient\SecurityConfig.class

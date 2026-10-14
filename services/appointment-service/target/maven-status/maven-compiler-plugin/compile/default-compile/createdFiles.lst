@@ -1,9 +1,0 @@
-com\example\hospital\appointment\Appointment$Status.class
-com\example\hospital\appointment\AppointmentController.class
-com\example\hospital\appointment\SecurityConfig.class
-com\example\hospital\appointment\AppointmentController$NotFound.class
-com\example\hospital\appointment\AppointmentRepository.class
-com\example\hospital\appointment\Appointment.class
-com\example\hospital\appointment\AppointmentServiceApplication.class
-com\example\hospital\appointment\AppointmentController$BookingRequest.class
-com\example\hospital\appointment\AppointmentController$Conflict.class

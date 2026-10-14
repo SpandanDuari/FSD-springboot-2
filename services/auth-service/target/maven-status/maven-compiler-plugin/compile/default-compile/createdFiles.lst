@@ -1,4 +1,0 @@
-com\example\hospital\auth\SecurityConfig.class
-com\example\hospital\auth\AuthController.class
-com\example\hospital\auth\AuthController$GoogleTokenRequest.class
-com\example\hospital\auth\AuthServiceApplication.class
